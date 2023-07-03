@@ -1,9 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Navigate, Routes, Route} from "react-router-dom";
+import LoginPage from "./components/LoginPage.js";
 
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">Hi</h1>
+    <div className="app">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
 
   );
 }
