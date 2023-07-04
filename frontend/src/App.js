@@ -3,7 +3,7 @@ import LoginPage from "./components/LoginPage.js";
 
 function App() {
   return (
-    <div className="app">
+    <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
