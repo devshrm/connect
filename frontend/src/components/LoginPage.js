@@ -17,12 +17,8 @@ const defaultTheme = createTheme({
         primary: {
             main: '#b3e3a7'
         },
-    },
-    typography: {
-        h3: {
-            color: '#b3e3a7'
-        }
     }
+  
 });
 
 
@@ -30,13 +26,22 @@ const LoginPage = () => {
     return(
         <ThemeProvider theme={defaultTheme}>
                 <CssBaseline />
+            <Box sx={{
+                border:1,
+                mx:60,
+                borderColor: 'grey.500',
+                borderRadius: '16px',
+                mt:10,
+                pb:5
+            }}>
             <Container component="main" maxWidth="xs">
-                <Typography variant="h3" align='center'>
+                <Typography py="1em" color="primary" variant="h3" align='center'>
                     Connect
                 </Typography>
                 
                 <LoginForm />
-            </Container>    
+            </Container>  
+            </Box>  
         </ThemeProvider>
     
        
