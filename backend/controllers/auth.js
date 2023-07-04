@@ -4,15 +4,16 @@ import User from "../models/User.js";
 
 export const register = async (req, res) => {
     try {
+        console.log(req.body)
         const {
             firstName,
             lastName,
             email,
             password,
-            picturePath,
+            // picturePath,
             location
         } = req.body;
-
+        console.log(firstName)
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password,salt);
 
@@ -21,7 +22,7 @@ export const register = async (req, res) => {
             lastName,
             email,
             password: passwordHash,
-            picturePath,
+            // picturePath,
             location
         });
         const savedUser = await newUser.save();
@@ -35,6 +36,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log("email",email);
         const user = await User.findOne({ email: email});
         if(!user) return res.status(400).json({error: "User does not exist"});
 

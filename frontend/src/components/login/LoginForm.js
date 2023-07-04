@@ -10,6 +10,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
+import { setLogin } from "../../state";
 
 
 
@@ -26,6 +27,9 @@ const initialLoginValues = {
 };
 
 const LoginForm = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleFormSubmit = async (values, onSubmitProps) => {
         console.log(values)
         const loginResponse = await fetch("http://localhost:3001/auth/login", {
@@ -34,8 +38,16 @@ const LoginForm = () => {
             body: JSON.stringify(values)
         });
         const loginServer = await loginResponse.json();
+        onSubmitProps.resetForm();
         if(loginServer){
             console.log("you are logged in");
+            dispatch(
+                setLogin({
+                    user: loginServer.user,
+                    token: loginServer.token
+                })
+            );
+            navigate("/home");
         }
     };
 
@@ -96,6 +108,23 @@ const LoginForm = () => {
                                 sx={{ mt: 3, mb: 2 }}>
                                 Sign In
                             </Button>
+
+                            <Typography
+                                onClick={() => {
+                                   navigate("/register");
+                                   formik.resetForm();
+                                }}
+                                sx={{
+                                    textDecoration: "underline",
+                                    color: defaultTheme.palette.primary.main,
+                                    "&:hover": {
+                                    cursor: "pointer",
+                                    color: defaultTheme.palette.primary.light,
+                                    },
+                                }}
+                                >
+                                Don't have an account? Sign Up here
+                            </Typography>
                         </form>  
                 </Box>
 
